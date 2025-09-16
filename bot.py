@@ -1,18 +1,14 @@
-from telegram.ext import Updater, CommandHandler
+import os
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
 
-# Inserisci qui il tuo token reale
-TOKEN = 8208920451:AAGY7Y-xnmgX6w0TTFoSLHcx2B0RMG0GdwI
-def start(update, context):
-    update.message.reply_text("Ciao! Sono il tuo bot di pronostici ⚽")
+TOKEN = os.getenv("BOT_TOKEN")  # prende il token dalle Config Vars
 
-def pronostico(update, context):
-    update.message.reply_text("Esempio: Over 2.5 con probabilità 65%")
+def start(update: Update, context: CallbackContext):
+    update.message.reply_text("Ciao! Il bot è attivo su Heroku 🚀")
 
-updater = Updater(TOKEN, use_context=True)
-dp = updater.dispatcher
-
-dp.add_handler(CommandHandler("start", start))
-dp.add_handler(CommandHandler("pronostico", pronostico))
+updater = Updater(TOKEN)
+updater.dispatcher.add_handler(CommandHandler("start", start))
 
 updater.start_polling()
 updater.idle()
