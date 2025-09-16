@@ -1,14 +1,13 @@
-import os
-from telegram import Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram.ext import Updater, CommandHandler
 
-TOKEN = os.getenv("BOT_TOKEN")  # prende il token dalle Config Vars
+TOKEN = "IL_TUO_TOKEN"
 
-def start(update: Update, context: CallbackContext):
-    update.message.reply_text("Ciao! Il bot è attivo su Heroku 🚀")
+def start(update, context):
+    update.message.reply_text("Ciao! Bot online 24/7 ✅")
 
 updater = Updater(TOKEN)
-updater.dispatcher.add_handler(CommandHandler("start", start))
+dp = updater.dispatcher
+dp.add_handler(CommandHandler("start", start))
 
 updater.start_polling()
 updater.idle()
